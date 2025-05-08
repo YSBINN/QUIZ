@@ -36,23 +36,35 @@ export default function ResultScreen() {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: '40px auto', padding: 24, background: '#fff', borderRadius: 8 }}>
-      <h2>결과</h2>
-      <div style={{ fontSize: 24, marginBottom: 16 }}>점수: {score} / {questions.length}</div>
-      <div>
+    <div className="max-w-xl mx-auto mt-12 p-8 bg-white rounded-xl shadow-lg">
+      <h2 className="text-2xl font-bold mb-6 text-center text-blue-700">결과</h2>
+      <div className="text-2xl font-bold mb-8 text-center">점수: <span className="text-blue-600">{score}</span> / {questions.length}</div>
+      <div className="space-y-4 mb-8">
         {questions.map((q, i) => {
           const isCorrect = answers[i] === q.correct_answer;
           return (
-            <div key={i} style={{ marginBottom: 8, padding: 8, background: isCorrect ? '#e0ffe0' : '#ffe0e0', borderRadius: 4 }}>
-              <div><b>Q{i + 1}.</b> {q.question}</div>
-              <div>내 답: {answers[i] || '미응답'} {isCorrect ? '✅' : '❌'}</div>
-              {!isCorrect && <div>정답: {q.correct_answer}</div>}
+            <div key={i} className={`p-4 rounded-lg ${isCorrect ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}` }>
+              <div className="font-semibold mb-1"><b>Q{i + 1}.</b> {q.question}</div>
+              <div className="mb-1">내 답: <span className={isCorrect ? 'text-green-600' : 'text-red-600'}>{answers[i] || '미응답'}</span> {isCorrect ? '✅' : '❌'}</div>
+              {!isCorrect && <div className="text-sm text-gray-500">정답: {q.correct_answer}</div>}
             </div>
           );
         })}
       </div>
-      <button style={{ marginTop: 16, marginRight: 8 }} onClick={handleRetry}>다시하기</button>
-      <button style={{ marginTop: 16 }} onClick={handleShare}>결과 공유</button>
+      <div className="flex gap-4">
+        <button
+          className="flex-1 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded transition"
+          onClick={handleRetry}
+        >
+          다시하기
+        </button>
+        <button
+          className="flex-1 py-2 bg-green-500 hover:bg-green-600 text-white font-semibold rounded transition"
+          onClick={handleShare}
+        >
+          결과 공유
+        </button>
+      </div>
     </div>
   );
 } 

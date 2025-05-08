@@ -3,14 +3,13 @@ import StartScreen from './screens/StartScreen';
 import QuizScreen from './screens/QuizScreen';
 import ResultScreen from './screens/ResultScreen';
 import ScoreHistoryScreen from './screens/ScoreHistoryScreen';
-import './App.css'
 
 function App() {
   return (
-    <>
-      <nav style={{ padding: 16, background: '#f5f5f5', marginBottom: 24 }}>
-        <Link to="/" style={{ marginRight: 16 }}>퀴즈 시작</Link>
-        <Link to="/scores">점수 기록</Link>
+    <div className="min-h-screen bg-gray-100">
+      <nav className="flex items-center justify-center gap-6 py-4 bg-white shadow-md mb-8">
+        <Link to="/" className="text-lg font-semibold text-blue-600 hover:text-blue-800 transition">퀴즈 시작</Link>
+        <Link to="/scores" className="text-lg font-semibold text-gray-700 hover:text-blue-600 transition">점수 기록</Link>
       </nav>
       <Routes>
         <Route path="/" element={<StartScreen />} />
@@ -18,7 +17,7 @@ function App() {
         <Route path="/result" element={<ResultScreen />} />
         <Route path="/scores" element={<ScoreHistoryScreen />} />
       </Routes>
-    </>
+    </div>
   );
 }
 

@@ -24,7 +24,7 @@ export default function QuizScreen() {
     return () => clearTimeout(t);
   }, [timer]);
 
-  if (status !== 'playing' || !questions.length) return <div>문제가 없습니다.</div>;
+  if (status !== 'playing' || !questions.length) return <div className="text-center mt-16 text-gray-500">문제가 없습니다.</div>;
   const q = questions[current];
 
   const handleSubmit = () => {
@@ -37,24 +37,20 @@ export default function QuizScreen() {
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: '40px auto', padding: 24, background: '#fff', borderRadius: 8 }}>
-      <h2>문제 {current + 1} / {questions.length}</h2>
-      <div style={{ marginBottom: 16 }}><b>남은 시간: {timer}초</b></div>
-      <div style={{ marginBottom: 16 }}>{q.question}</div>
-      <div>
+    <div className="max-w-xl mx-auto mt-12 p-8 bg-white rounded-xl shadow-lg">
+      <h2 className="text-xl font-bold mb-2 text-blue-700">문제 {current + 1} / {questions.length}</h2>
+      <div className="mb-4 text-right text-sm text-gray-500"><b>남은 시간: <span className={timer <= 5 ? 'text-red-500' : ''}>{timer}</span>초</b></div>
+      <div className="mb-6 text-lg font-medium min-h-[48px]">{q.question}</div>
+      <div className="flex justify-center mb-4">
+        <div id="google_translate_element"></div>
+      </div>
+      <div className="space-y-3 mb-6">
         {q.options.map((opt) => (
           <button
             key={opt}
-            style={{
-              display: 'block',
-              margin: '8px 0',
-              background: selected === opt ? '#d1eaff' : '#eee',
-              width: '100%',
-              padding: 8,
-              borderRadius: 4,
-              border: '1px solid #ccc',
-              cursor: 'pointer',
-            }}
+            className={`w-full py-2 rounded border text-left px-4 font-semibold transition
+              ${selected === opt ? 'bg-blue-100 border-blue-400 text-blue-700' : 'bg-gray-100 border-gray-300 hover:bg-blue-50'}
+              ${selected ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
             onClick={() => setSelected(opt)}
             disabled={!!selected}
           >
@@ -62,7 +58,13 @@ export default function QuizScreen() {
           </button>
         ))}
       </div>
-      <button style={{ marginTop: 16 }} onClick={handleSubmit} disabled={selected === null}>제출</button>
+      <button
+        className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded transition disabled:bg-gray-300"
+        onClick={handleSubmit}
+        disabled={selected === null}
+      >
+        {current + 1 < questions.length ? '제출 & 다음' : '제출 & 결과보기'}
+      </button>
     </div>
   );
 } 
