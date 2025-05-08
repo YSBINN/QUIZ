@@ -4,11 +4,38 @@ import { useQuizStore } from '../store/quizStore';
 
 const TIMER_SEC = 20;
 
+// window.google 타입 선언
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 export default function QuizScreen() {
   const navigate = useNavigate();
   const { questions, current, answer, next, status } = useQuizStore();
   const [selected, setSelected] = useState<string | null>(null);
   const [timer, setTimer] = useState(TIMER_SEC);
+
+  // 번역 위젯 강제 재실행
+  useEffect(() => {
+    if (
+      window.google &&
+      window.google.translate &&
+      window.google.translate.TranslateElement
+    ) {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: 'en',
+          includedLanguages: 'ko,en,ja,zh-CN',
+          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+          autoDisplay: false,
+        },
+        'google_translate_element'
+      );
+    }
+  }, []);
 
   useEffect(() => {
     setTimer(TIMER_SEC);
