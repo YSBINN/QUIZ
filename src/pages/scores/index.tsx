@@ -1,4 +1,4 @@
-import { useScoreStore } from '../store/scoreStore';
+import { useScoreStore } from '../../store/scoreStore';
 
 const difficultyMap: { [key: string]: string } = {
   'easy': '쉬움',

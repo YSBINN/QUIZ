@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useQuizStore } from '../store/quizStore';
-import { useScoreStore } from '../store/scoreStore';
+import { useQuizStore } from '../../store/quizStore';
+import { useScoreStore } from '../../store/scoreStore';
 import { useNavigate } from 'react-router-dom';
 
 export default function ResultScreen() {

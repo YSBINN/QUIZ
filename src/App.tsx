@@ -1,8 +1,8 @@
 import { Routes, Route, Link } from 'react-router-dom';
-import StartScreen from './screens/StartScreen';
-import QuizScreen from './screens/QuizScreen';
-import ResultScreen from './screens/ResultScreen';
-import ScoreHistoryScreen from './screens/ScoreHistoryScreen';
+import StartScreen from './pages/start';
+import QuizScreen from './pages/quiz';
+import ResultScreen from './pages/result';
+import ScoreHistoryScreen from './pages/scores';
 
 function App() {
   return (

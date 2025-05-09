@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchQuestions } from '../api/triviaApi';
-import { useQuizStore, Difficulty } from '../store/quizStore';
+import { fetchQuestions } from '../../api/triviaApi';
+import { useQuizStore, Difficulty } from '../../store/quizStore';
 
 const difficulties: { value: Difficulty; label: string }[] = [
   { value: 'easy', label: '쉬움' },
