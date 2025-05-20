@@ -85,12 +85,19 @@ export default function QuizScreen() {
 
   useEffect(() => {
     if (timer === 0) {
-      handleSubmit();
+      answer(''); // 시간 초과시 빈 답변으로 처리
+      next();
       return;
     }
     const t = setTimeout(() => setTimer(timer - 1), 1000);
     return () => clearTimeout(t);
-  }, [timer, handleSubmit]);
+  }, [timer, answer, next]);
+
+  useEffect(() => {
+    if (status === 'finished') {
+      navigate('/result');
+    }
+  }, [status, navigate]);
 
   if (status !== 'playing' || !questions.length) return <div className="text-center mt-16 text-gray-500">문제가 없습니다.</div>;
   const q = questions[current];
